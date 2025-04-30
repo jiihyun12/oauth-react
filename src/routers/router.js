@@ -5,35 +5,68 @@ import MyPage from "../pages/my/MyPage";
 import SignIn from "../pages/signIn/SignIn";
 import SignInSuccess from "../pages/signIn/SignInSuccess";
 import SignUp from "../pages/signUp/SignUp";
+import AuthLayout from "../pages/layout/AuthLayout";
+import Sms from "../pages/signUp/Sms";
+import PaymentContainer from "../pages/payment/PaymentContainer";
+import Detail from "../pages/payment/Detail";
+import Success from "../pages/payment/Success";
+import Failed from "../pages/payment/Failed";
 
 const router = createBrowserRouter([
-    {
-        path : "/",
-        element : <Layout />,
+  {
+    path : "/",
+    element : <Layout />,
+    children : [
+      {
+        path : "",
+        element : <Main />
+      },
+      {
+        path : "/member",
+        element : <AuthLayout />,
         children : [
-            {
-                path : "",
-                element : <Main />
-            },
-            {
-                path : "/my",
-                element : <MyPage />
-            }
+          {
+            path : "my",
+            element : <MyPage />
+          }
         ]
-    },
-    {
-        path : "sign-in",
-        element : <SignIn />
-    },
-    {
-        path : "sign-in-success",
-        element : <SignInSuccess />
-    },
-    {
-        path : "sign-up",
-        element : <SignUp />
-    },
-
+      },
+      {
+        path : "/payment",
+        element : <PaymentContainer />,
+        children : [
+          {
+            path : "",
+            element : <Detail />
+          },
+          {
+            path : "success",
+            element : <Success />
+          },
+          {
+            path : "failed",
+            element : <Failed />
+          },
+        ]
+      }
+    ]
+  },
+  {
+    path : "/sign-in",
+    element : <SignIn />
+  },
+  {
+    path : "/sms",
+    element : <Sms />
+  },
+  {
+    path : "/sign-in-success",
+    element : <SignInSuccess />
+  },
+  {
+    path : "/sign-up",
+    element : <SignUp />
+  },
 ])
 
 export default router;
